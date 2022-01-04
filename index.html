@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Library</title>
+</head>
+<body>
+  <header>
+    <h1>My Library</h1>
+    <button type="button" id="add-book">Add a Book</button>
+  </header>
+  <section id="sort-container">
+    <label for="sort">Sort by:</label>
+    <select name="sort" id="sort">
+      <option value="title">Title</option>
+      <option value="author">Author</option>
+      <option value="genre">Genre</option>
+      <option value="pages">No. of Pages</option>
+      <option value="status">Status</option>
+    </select>
+    <button type="button" id=apply-sort>Apply</button>
+    
+    <div id=read-counter>
+    <p>Read: </p>
+      <div id="read-color">
+        <p id="p-read-color">2</p>
+      </div>
+        <p>Unread: </p>
+      <div id="unread-color">
+        <p>2</p>
+      </div>
+    </div>
+  </section>
+  <section id="cards-container">
+    
+  </section>
+  <footer>
+    <p>reyolan | Github</p>
+  </footer>
+
+
+  
+  <div class="modal-box">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 id="modal-header-text">Add a Book</h1>
+        <div id="close-button">X</div>
+      </div>
+      <form autocomplete="off">
+        <label for="title">Title:</label>
+        <input type=text name="title" placeholder="Title" id="title" class="text-field" >
+        <label for="author">Author:</label>
+        <input type=text name="author" placeholder="Author" id="author" class="text-field">
+        <label for="genre">Genre:</label>
+        <input type=text name="genre" placeholder="Genre" id="genre" class="text-field">
+        <label for="pages">No. of Pages:</label>
+        <input type=number name="pages" placeholder="Number of Pages" id="pages" class="text-field">
+        <div id=radio-button>
+          <input type=radio name="read-status" id="read" value="Read">
+          <label for="read">Read</label>
+          <input type=radio name="read-status" id="not-read" value="Unread">
+          <label for="not-read">Unread</label>
+        </div>
+        <div id="buttons">
+          <button type="button" id=add-book-modal>Add Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
