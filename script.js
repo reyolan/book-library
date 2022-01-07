@@ -45,18 +45,14 @@ function Book(title, author, genre, pages, status) {
 }
 
 Book.prototype.changeStatus = function (e) {
-	let domCurrentStatus =
-		e.target.parentNode.parentNode.childNodes[0].childNodes[3].textContent;
-	let cards = document.querySelectorAll(".cards");
 	if (this.status === "Read") {
 		this.status = "Unread";
-		domCurrentStatus = this.status;
 	} else {
 		this.status = "Read";
-		domCurrentStatus = this.status;
 	}
-	cards.forEach((card) => card.remove());
+	removeAllCards();
 	showBookLibrary();
+	updateReadCounter();
 };
 
 function setSubmitBtnValue() {
@@ -122,6 +118,12 @@ function emptyField() {
 function addCardtoDom(libraryIndex, title, author, genre, pages, status) {
 	let card = document.createElement("div");
 	card.classList.toggle("cards");
+
+	if (status === "Read") {
+		card.classList.toggle("read-card");
+	} else {
+		card.classList.toggle("unread-card");
+	}
 	card.dataset.libraryIndex = libraryIndex;
 	cardContainer.appendChild(card);
 
@@ -158,12 +160,12 @@ function addCardtoDom(libraryIndex, title, author, genre, pages, status) {
 
 	let authorCard = document.createElement("p");
 	authorCard.classList.toggle("author-card");
-	authorCard.textContent = author;
+	authorCard.textContent = `Author: ${author}`;
 	firstColumnCardContent.appendChild(authorCard);
 
 	let genreCard = document.createElement("p");
 	genreCard.classList.toggle("genre-card");
-	genreCard.textContent = genre;
+	genreCard.textContent = `Genre: ${genre}`;
 	firstColumnCardContent.appendChild(genreCard);
 
 	let pageCard = document.createElement("p");
@@ -171,13 +173,8 @@ function addCardtoDom(libraryIndex, title, author, genre, pages, status) {
 	pageCard.textContent = `${pages} pages`;
 	firstColumnCardContent.appendChild(pageCard);
 
-	let statusCard = document.createElement("p");
-	statusCard.classList.toggle("status-card");
-	statusCard.textContent = status;
-	firstColumnCardContent.appendChild(statusCard);
-
 	let markStatusBtn = document.createElement("button");
-	if (statusCard.textContent === "Read") {
+	if (status === "Read") {
 		markStatusBtn.textContent = "Mark as Unread";
 	} else {
 		markStatusBtn.textContent = "Mark as Read";
@@ -201,12 +198,66 @@ function addBookLibrarytoDom() {
 		bookLibrary[bookLibrary.length - 1].pages,
 		bookLibrary[bookLibrary.length - 1].status
 	);
+	updateReadCounter();
 }
 
 function removeCard(e) {
-	let index = e.target.parentNode.parentNode.parentNode.dataset.libraryIndex;
+	const index = e.target.parentNode.parentNode.parentNode.dataset.libraryIndex;
 	bookLibrary.splice(index, 1);
 	e.target.parentNode.parentNode.parentNode.remove();
+	updateReadCounter();
+}
+
+function updateReadCounter() {
+	const statusCounter = bookLibrary.reduce(statusCountFunc, {});
+	function statusCountFunc(obj, book) {
+		if (!obj[book.status]) {
+			obj[book.status] = 0;
+		}
+		obj[book.status]++;
+		return obj;
+	}
+
+	if (!statusCounter.Read) {
+		statusCounter.Read = 0;
+	} else if (!statusCounter.Unread) {
+		statusCounter.Unread = 0;
+	}
+
+	const readCountId = document.querySelector("#read-counter");
+	readCountId.textContent = statusCounter.Read;
+	const unreadCountId = document.querySelector("#unread-counter");
+	unreadCountId.textContent = statusCounter.Unread;
+}
+
+const applySortBtn = document.querySelector("#apply-sort");
+applySortBtn.addEventListener("click", sortLibrary);
+
+//sort array
+function sortLibrary() {
+	const sortIndex = document.querySelector("#sort").selectedIndex;
+	const indexText = document
+		.querySelector("#sort")
+		.options[sortIndex].text.toLowerCase();
+	console.log(indexText);
+	bookLibrary.sort(function (a, b) {
+		let propA = a[indexText].toUpperCase();
+		let propB = b[indexText].toUpperCase();
+		if (propA > propB) {
+			return 1;
+		} else if (propA < propB) {
+			return -1;
+		} else {
+			return 0;
+		}
+	});
+	removeAllCards();
+	showBookLibrary();
+}
+
+function removeAllCards() {
+	const cards = document.querySelectorAll(".cards");
+	cards.forEach((card) => card.remove());
 }
 
 //show the elements of array
@@ -225,3 +276,4 @@ function showBookLibrary() {
 }
 
 showBookLibrary();
+updateReadCounter();

@@ -8,29 +8,32 @@
   <title>Library</title>
 </head>
 <body>
-  <header>
-    <h1>My Library</h1>
-    <button type="button" id="add-book">Add a Book</button>
-  </header>
-  <section id="sort-container">
-    <label for="sort">Sort by:</label>
-    <select name="sort" id="sort">
-      <option value="title">Title</option>
-      <option value="author">Author</option>
-      <option value="genre">Genre</option>
-      <option value="pages">No. of Pages</option>
-      <option value="status">Status</option>
-    </select>
-    <button type="button" id=apply-sort>Apply</button>
+  <div id="header-and-sort">
+    <header>
+      <h1>My Library</h1>
+      <button type="button" id="add-book">Add a Book</button>
+    </header>
+    <section id="sort-container">
+      <label for="sort">Sort by:</label>
+      <select name="sort" id="sort">
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+        <option value="genre">Genre</option>
+        <option value="pages">Pages</option>
+        <option value="status">Status</option>
+      </select>
+
+      <button type="button" id=apply-sort>Apply</button>
     
-    <div id=read-counter>
-    <p>Read: </p>
-      <div id="read-color">
-        <p id="p-read-color">2</p>
-      </div>
-        <p>Unread: </p>
-      <div id="unread-color">
-        <p>2</p>
+      <div id=status-counter>
+        <p>Read: </p>
+        <div id="read-color">
+          <p id="read-counter">2</p>
+        </div>
+          <p>Unread: </p>
+        <div id="unread-color">
+          <p id="unread-counter">2</p>
+        </div>
       </div>
     </div>
   </section>
