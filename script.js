@@ -9,29 +9,31 @@ let bookLibrary = [
 	),
 ];
 
-const cardContainer = document.querySelector("#cards-container");
 const titleField = document.querySelector("#title");
 const authorField = document.querySelector("#author");
 const genreField = document.querySelector("#genre");
 const pageField = document.querySelector("#pages");
 const statusBtn = document.querySelectorAll("input[name=read-status]");
 
-const addBookModalBtn = document.querySelector("#add-book-modal");
-addBookModalBtn.addEventListener("click", setSubmitBtnValue);
+function initializeEvents() {
+	const addBookModalBtn = document.querySelector("#add-book-modal");
+	addBookModalBtn.addEventListener("click", setSubmitBtnValue);
 
-//modal box
-const modalBox = document.querySelector(".modal-box");
-const addBookBtn = document.querySelector("#add-book");
-const closeBtn = document.querySelector("#close-button");
-addBookBtn.addEventListener("click", toggleModalBox);
-closeBtn.addEventListener("click", () => {
-	toggleModalBox();
-	emptyField();
-});
-window.addEventListener("click", windowOnClick);
+	const addBookBtn = document.querySelector("#add-book");
+	addBookBtn.addEventListener("click", toggleModalBox);
+
+	const closeBtn = document.querySelector("#close-button");
+	closeBtn.addEventListener("click", () => {
+		toggleModalBox();
+		emptyField();
+	});
+
+	window.addEventListener("click", windowOnClick);
+}
 
 //modal box
 function toggleModalBox() {
+	const modalBox = document.querySelector(".modal-box");
 	modalBox.classList.toggle("show-modal");
 }
 
@@ -84,6 +86,7 @@ function addBookToLibrary(statusBtnValue) {
 }
 
 function windowOnClick(e) {
+	const modalBox = document.querySelector(".modal-box");
 	if (e.target === modalBox) {
 		toggleModalBox();
 		emptyField();
@@ -116,7 +119,7 @@ function emptyField() {
 }
 
 function addCardtoDom(libraryIndex, title, author, genre, pages, status) {
-	let card = document.createElement("div");
+	const card = document.createElement("div");
 	card.classList.toggle("cards");
 
 	if (status === "Read") {
@@ -125,55 +128,57 @@ function addCardtoDom(libraryIndex, title, author, genre, pages, status) {
 		card.classList.toggle("unread-card");
 	}
 	card.dataset.libraryIndex = libraryIndex;
+
+	const cardContainer = document.querySelector("#cards-container");
 	cardContainer.appendChild(card);
 
-	let cardContents = document.createElement("div");
+	const cardContents = document.createElement("div");
 	cardContents.classList.toggle("card-contents");
 	card.appendChild(cardContents);
 
-	let firstRowCardContent = document.createElement("div");
+	const firstRowCardContent = document.createElement("div");
 	firstRowCardContent.classList.toggle("first-row-card-content");
 	cardContents.appendChild(firstRowCardContent);
 
-	let secondRowCardContent = document.createElement("div");
+	const secondRowCardContent = document.createElement("div");
 	secondRowCardContent.classList.toggle("second-row-card-content");
 	cardContents.appendChild(secondRowCardContent);
 
-	let firstColumnCardContent = document.createElement("div");
+	const firstColumnCardContent = document.createElement("div");
 	firstColumnCardContent.classList.toggle("first-column-card-content");
 	secondRowCardContent.appendChild(firstColumnCardContent);
 
-	let secondColumnCardContent = document.createElement("div");
+	const secondColumnCardContent = document.createElement("div");
 	secondColumnCardContent.classList.toggle("second-column-card-content");
 	secondRowCardContent.appendChild(secondColumnCardContent);
 
-	let titleCard = document.createElement("p");
+	const titleCard = document.createElement("p");
 	titleCard.classList.toggle("title-card");
 	titleCard.textContent = title;
 	firstRowCardContent.appendChild(titleCard);
 
-	let divClose = document.createElement("div");
+	const divClose = document.createElement("div");
 	divClose.classList.toggle("delete-card");
 	divClose.textContent = "X";
 	divClose.addEventListener("click", removeCard);
 	firstRowCardContent.appendChild(divClose);
 
-	let authorCard = document.createElement("p");
+	const authorCard = document.createElement("p");
 	authorCard.classList.toggle("author-card");
 	authorCard.textContent = `Author: ${author}`;
 	firstColumnCardContent.appendChild(authorCard);
 
-	let genreCard = document.createElement("p");
+	const genreCard = document.createElement("p");
 	genreCard.classList.toggle("genre-card");
 	genreCard.textContent = `Genre: ${genre}`;
 	firstColumnCardContent.appendChild(genreCard);
 
-	let pageCard = document.createElement("p");
+	const pageCard = document.createElement("p");
 	pageCard.classList.toggle("page-card");
 	pageCard.textContent = `${pages} pages`;
 	firstColumnCardContent.appendChild(pageCard);
 
-	let markStatusBtn = document.createElement("button");
+	const markStatusBtn = document.createElement("button");
 	if (status === "Read") {
 		markStatusBtn.textContent = "Mark as Unread";
 	} else {
@@ -277,3 +282,4 @@ function showBookLibrary() {
 
 showBookLibrary();
 updateReadCounter();
+initializeEvents();

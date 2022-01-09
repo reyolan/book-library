@@ -8,8 +8,9 @@ body {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	justify-content: space-between;
 	min-height: 100vh;
-	background-color: #f5f5f5;
+	background-color: lightgray;
 	gap: 5px;
 }
 
@@ -30,21 +31,23 @@ header {
 	width: 100%;
 	gap: 300px;
 	height: 50px;
-	border-bottom: 1px solid lightgray;
 	font-size: 25px;
 }
 
 footer {
-	background-color: #a9a9a9;
+	background-color: #abd699;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 5vh;
+	height: 30px;
 	width: 100%;
-	font-size: 30px;
+	font-size: 20px;
 }
 #add-book {
-	height: 30px;
+	height: 50px;
+	width: 120px;
+	font-size: 20px;
+	background-color: #ffe26a;
 }
 
 #sort-container {
@@ -52,7 +55,7 @@ footer {
 	align-items: center;
 	gap: 8px;
 	width: 80%;
-	background-color: #a9a9a9;
+	background-color: #ffe26a;
 	padding: 20px;
 	height: 5vh;
 	font-size: 20px;
@@ -73,9 +76,8 @@ footer {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	gap: 30px;
+	gap: 24px;
 	padding: 10px;
-	background-color: #a9a9a9;
 }
 
 .cards {
@@ -86,12 +88,12 @@ footer {
 
 .read-card,
 #read-color {
-	background-color: #caebf2;
+	background-color: #79c9b7;
 }
 
 .unread-card,
 #unread-color {
-	background-color: #ff3b3f;
+	background-color: #c7ddcc;
 }
 
 .title-card {
@@ -157,9 +159,9 @@ footer {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #eee;
+	background: inherit;
 	border-radius: 50%;
-	color: #888;
+	color: black;
 	font-weight: 400;
 	font-size: 16px;
 	height: 24px;
@@ -169,7 +171,7 @@ footer {
 
 #close-button:hover,
 .delete-card:hover {
-	background-color: darkgray;
+	background-color: lightgray;
 }
 
 .first-row-card-content {
@@ -201,8 +203,10 @@ footer {
 	align-items: center;
 	height: 60%;
 	width: 50%;
-	font-size: 28px;
+	font-size: 20px;
 	padding: 15px;
+	border: inline;
+	background-color: #eee;
 }
 
 form {
