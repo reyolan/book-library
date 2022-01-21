@@ -5,7 +5,5 @@ This simple project was made to showcase object constructor and the prototype ob
 This project is still incomplete. This is pushed for future reference.
 
 Things to update:
-Change color when book is read/unread.
 Adjust sizes/gaps/spacings.
 Finalize color and design
-Add sort feature by sorting the bookLibrary array.
